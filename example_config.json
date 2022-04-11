@@ -1,0 +1,23 @@
+{
+  "zip": 63116,
+  "radius": 500,
+  "make": "nissan",
+  "model": "370z",
+  "trim_kw": "Touring",
+  "keywords": "apple carplay | aftermarket",
+  "minprice": 1000,
+  "maxprice": 30000,
+  "minyear": 2009,
+  "maxyear": 2020,
+  "minmiles": 5000,
+  "maxmiles": 150000,
+  "transmission": "man",
+  "title": "clean",
+  "drive": "rwd",
+  "fuel": "gas",
+  "exterior_color": "black",
+  "interior_color": "black",
+  "doors": 2,
+  "cylinders": 6,
+  "bodystyle": "coupe"
+}
