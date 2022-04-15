@@ -5,23 +5,15 @@ from typing import Union
 
 
 def args() -> Union[dict, argparse.Namespace]:
-    with open('../config.json') as config_file:
-        config = load(config_file)
-
-    # TODO: Find a 'better' way to choose configuration of parameters.
-    if len(config) > 2:
-        return config
-
     parser = argparse.ArgumentParser(
         description='Car scraper for auto tempest, specify parameters below.')
     parser.add_argument('-M', '--make', dest='make',
                         help="Make of the car, I.E Nissan")
     parser.add_argument('-m', '--model', dest='model',
                         help="Model of the car, I.E 370z")
-    parser.add_argument('-z', '--zip', dest='zip', type=int, required=True,
+    parser.add_argument('-z', '--zip', dest='zip', type=int,
                         help="ZIP code for the location to search from.")
     parser.add_argument('-r', '--radius', dest='radius', type=int,
-                        required=True,
                         help='Radius around the given zip code to search.')
     parser.add_argument('-t', '--trim', dest='trim',
                         help='Specify the trim of the car here, I.E Sport Touring.')
@@ -58,6 +50,23 @@ def args() -> Union[dict, argparse.Namespace]:
     parser.add_argument('-b', '--bodystyle', dest='bodystyle',
                         help='Specify the body style of the vehicle.')
 
-    options = parser.parse_args()
+    options = vars(parser.parse_args())
+
+    if not passed_args(options):
+        try:
+            with open('../config.json') as config_file:
+                config = load(config_file)
+        except FileNotFoundError:
+            raise FileNotFoundError('If you do not specify arguments, you must'
+                                    ' have a config.json file.')
+        else:
+            return config
 
     return options
+
+
+def passed_args(arguments: dict) -> bool:
+    if all(isinstance(v, type(None)) for v in arguments.values()):
+        return False
+    else:
+        return True

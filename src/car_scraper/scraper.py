@@ -11,8 +11,6 @@ URL = 'https://www.autotempest.com/results?'
 
 def main() -> None:
     arguments = args()
-    if arguments is not dict:
-        arguments = vars(arguments)
 
     parameter = generate_parameter(arguments)
 
