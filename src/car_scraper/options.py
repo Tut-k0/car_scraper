@@ -1,10 +1,9 @@
 import argparse
 
 from json import load
-from typing import Union
 
 
-def args() -> Union[dict, argparse.Namespace]:
+def args() -> dict:
     parser = argparse.ArgumentParser(
         description='Car scraper for auto tempest, specify parameters below.')
     parser.add_argument('-M', '--make', dest='make',
@@ -56,11 +55,10 @@ def args() -> Union[dict, argparse.Namespace]:
         try:
             with open('../config.json') as config_file:
                 config = load(config_file)
+                return config
         except FileNotFoundError:
             raise FileNotFoundError('If you do not specify arguments, you must'
                                     ' have a config.json file.')
-        else:
-            return config
 
     return options
 

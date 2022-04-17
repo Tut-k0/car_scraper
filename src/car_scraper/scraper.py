@@ -31,7 +31,7 @@ def generate_parameter(parameters: dict) -> str:
 
 
 async def scrape(url: str, parameter: str) -> None:
-    browser = await launch()
+    browser = await launch(autoClose=False)
     page = await browser.newPage()
     await page.goto(url + parameter)
     page_content = await page.content()
